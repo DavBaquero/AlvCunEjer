@@ -2,6 +2,7 @@ package entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,16 @@ public class Persona {
     private String NSS;
 
 
-    //private Direccion direccion;
-    //private List<String> telefono;
+    @Embedded
+    private Direccion direccion;
+
+    @ElementCollection
+    @CollectionTable(name = "telefonos", joinColumns = @JoinColumn(name = "DNI"),
+            foreignKey = @ForeignKey(name = "FK_telefono_persona"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"DNI", "telefono"},
+                    name = "telefono_persona_uk"))
+    @Column(name = "telefono", nullable = false, length = 9)
+    private List<String> listaTelefonos = new ArrayList<>();
 
     public String getNombre() {
         return nombre;
@@ -47,21 +56,25 @@ public class Persona {
         this.NSS = NSS;
     }
 
-//    public Direccion getDireccion() {
-//        return direccion;
-//    }
-//
-//    public void setDireccion(Direccion direccion) {
-//        this.direccion = direccion;
-//    }
-//
-//    public List<String> getTelefono() {
-//        return telefono;
-//    }
-//
-//    public void setTelefono(List<String> telefono) {
-//        this.telefono = telefono;
-//    }
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<String> getListaTelefonos() {
+        return listaTelefonos;
+    }
+
+    public void setListaTelefonos(List<String> telefono) {
+        this.listaTelefonos = telefono;
+    }
+
+    public void addTelefonos(String telefono) {
+        this.listaTelefonos.add(telefono);
+    }
 
     @Override
     public String toString() {
@@ -69,8 +82,8 @@ public class Persona {
                 "nombre='" + nombre + '\'' +
                 ", DNI='" + DNI + '\'' +
                 ", NSS='" + NSS + '\'' +
-//                ", direccion=" + direccion +
-//                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", telefono=" + listaTelefonos +
                 '}';
     }
 }

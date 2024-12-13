@@ -1,10 +1,23 @@
 package entities;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Direccion {
     private String calle;
     private int numero;
     private String cp;
     private String piso;
+
+    public Direccion(String calle, int numero, String cp, String piso) {
+        this.calle = calle;
+        this.numero = numero;
+        this.cp = cp;
+        this.piso = piso;
+    }
+
+    public Direccion() {
+    }
 
     public int getNumero() {
         return numero;
