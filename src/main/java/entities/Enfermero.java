@@ -1,30 +1,39 @@
 package entities;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "enfermeros")
+@PrimaryKeyJoinColumn(name = "DNI")
+@DiscriminatorValue("enfermero")
 public class Enfermero extends Persona{
-    private Enum<Turnos> turno;
-    private Planta planta;
-
-    public Enum<Turnos> getTurno() {
-        return turno;
-    }
-
-    public void setTurno(Enum<Turnos> turno) {
-        this.turno = turno;
-    }
-
-    public Planta getPlanta() {
-        return planta;
-    }
-
-    public void setPlanta(Planta planta) {
-        this.planta = planta;
-    }
-
-    @Override
-    public String toString() {
-        return "Enfermero{" +
-                "turno=" + turno +
-                ", planta=" + planta +
-                '}';
-    }
+//    private Enum<Turnos> turno;
+//    private Planta planta;
+//
+//    public Enum<Turnos> getTurno() {
+//        return turno;
+//    }
+//
+//    public void setTurno(Enum<Turnos> turno) {
+//        this.turno = turno;
+//    }
+//
+//    public Planta getPlanta() {
+//        return planta;
+//    }
+//
+//    public void setPlanta(Planta planta) {
+//        this.planta = planta;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Enfermero{" +
+//                "turno=" + turno +
+//                ", planta=" + planta +
+//                '}';
+//    }
 }
